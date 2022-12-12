@@ -4,7 +4,8 @@ import networkx as nx
 
 CHAR_MAP = dict((ch, idx) for idx, ch in enumerate(ascii_lowercase))
 
-def connect_nodes_if_necessary(node1, node2, node1_pos, node2_pos, edges_list):
+
+def connect_nodes_if_needed(node1, node2, node1_pos, node2_pos, edges_list):
     node1_idx = CHAR_MAP[node1]
     node2_idx = CHAR_MAP[node2]
 
@@ -76,7 +77,7 @@ if __name__ == '__main__':
                 current_char = current_row[current_char_idx]
                 previous_char_pos = (current_row_idx, current_char_idx - 1)
                 current_char_pos = (current_row_idx, current_char_idx)
-                connect_nodes_if_necessary(previous_char, current_char, previous_char_pos, current_char_pos, edges)
+                connect_nodes_if_needed(previous_char, current_char, previous_char_pos, current_char_pos, edges)
                 previous_char = current_char
 
             # Connect elements of the current row to the previous row
@@ -86,7 +87,7 @@ if __name__ == '__main__':
                     current_char = current_row[previous_char_idx]
                     previous_char_pos = (current_row_idx - 1, previous_char_idx)
                     current_char_pos = (current_row_idx, previous_char_idx)
-                    connect_nodes_if_necessary(previous_char, current_char, previous_char_pos, current_char_pos, edges)
+                    connect_nodes_if_needed(previous_char, current_char, previous_char_pos, current_char_pos, edges)
 
             previous_row = current_row
 
@@ -95,4 +96,5 @@ if __name__ == '__main__':
         all_possible_start_nodes = find_character_in_multiple_lines(lines, 'a', stop_at_first=False)
 
         print("Result Part 1: ", nx.astar_path_length(graph, start_node_pos, end_node_pos))
-        print("Result Part 2: ", min(nx.astar_path_length(graph, start_node, end_node_pos) for start_node in all_possible_start_nodes))
+        print("Result Part 2: ",
+              min(nx.astar_path_length(graph, start_node, end_node_pos) for start_node in all_possible_start_nodes))
