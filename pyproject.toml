@@ -9,7 +9,8 @@ packages = [{ include = "advent_of_code_22" }]
 [tool.poetry.dependencies]
 python = "^3.10"
 numpy = "*"
-
+networkx = "*"
+matplotlib = "*"
 
 [build-system]
 requires = ["poetry-core"]
